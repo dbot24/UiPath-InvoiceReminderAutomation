@@ -5,3 +5,7 @@ fileSubjectMail=SubjectMail.txt
 fileBodyMail=BodyMail.txt
 fileNameExcel=Invoice_Data.xlsx
 excelSheet=Invoices
+SMTPServer=smtp.gmail.com
+SMTPPort=587
+SMTPMail=
+SMTPPassword=

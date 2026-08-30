@@ -116,6 +116,7 @@
       <AssemblyReference>UiPath.Mail.Activities.Design</AssemblyReference>
       <AssemblyReference>System.Memory.Data</AssemblyReference>
       <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>GlobalVariablesT1PNoYwrqg</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <Sequence DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="897.2,683.2" sap2010:WorkflowViewState.IdRef="Sequence_1">
@@ -262,7 +263,6 @@
                                   <Sequence.Variables>
                                     <Variable x:TypeArguments="s:DateTime" Name="getDueDateTime" />
                                     <Variable x:TypeArguments="x:String" Name="daysOverdue" />
-                                    <Variable x:TypeArguments="x:String" Name="getStatus" />
                                   </Sequence.Variables>
                                   <sap:WorkflowViewStateService.ViewState>
                                     <scg:Dictionary x:TypeArguments="x:String, x:Object">

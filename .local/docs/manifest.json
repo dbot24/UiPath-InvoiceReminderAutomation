@@ -1,4 +1,5 @@
 {
   "UiPath.Excel.Activities": "3.6.0-preview",
+  "UiPath.Mail.Activities": "2.11.10",
   "UiPath.System.Activities": "26.6.2"
 }
