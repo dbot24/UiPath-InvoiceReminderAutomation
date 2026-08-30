@@ -1,0 +1,16 @@
+Halo {CustomerName},
+
+Kami ingin mengingatkan bahwa invoice berikut masih belum dibayar:
+
+• Invoice ID   : {InvoiceID}
+• Tanggal Jatuh Tempo : {DueDate}
+• Jumlah Tagihan : Rp {Amount}
+• Keterlambatan : {DaysOverdue} hari
+• Prioritas     : {Priority}
+
+Mohon segera lakukan pembayaran untuk menghindari denda keterlambatan.
+
+Terima kasih atas perhatiannya.
+
+Hormat kami,
+Finance Team

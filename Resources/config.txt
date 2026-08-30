@@ -1,0 +1,7 @@
+projectPath=Environment.CurrentDirectory
+inputFolder=Path.Combine(projectPath, "Data", "Input")
+outputFolder=Path.Combine(projectPath, "Data"," Output)
+fileSubjectMail=SubjectMail.txt
+fileBodyMail=BodyMail.txt
+fileNameExcel=Invoice_Data.xlsx
+excelSheet=Invoices
