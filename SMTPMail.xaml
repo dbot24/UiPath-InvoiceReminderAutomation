@@ -176,6 +176,14 @@
                 <InArgument x:TypeArguments="x:String">["Unpaid"]</InArgument>
               </ui:FilterOperationArgument.Operand>
             </ui:FilterOperationArgument>
+            <ui:FilterOperationArgument BooleanOperator="And" Operator="GT">
+              <ui:FilterOperationArgument.Column>
+                <InArgument x:TypeArguments="x:String">["DaysOverdue"]</InArgument>
+              </ui:FilterOperationArgument.Column>
+              <ui:FilterOperationArgument.Operand>
+                <InArgument x:TypeArguments="x:Int32">[0]</InArgument>
+              </ui:FilterOperationArgument.Operand>
+            </ui:FilterOperationArgument>
           </scg:List>
         </ui:FilterDataTable.Filters>
         <ui:FilterDataTable.SelectColumns>
