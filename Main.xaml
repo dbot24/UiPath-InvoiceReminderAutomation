@@ -47,6 +47,7 @@
       <x:String>UiPath.Mail.Activities</x:String>
       <x:String>CredentialManagement</x:String>
       <x:String>UiPath.Credentials.Activities</x:String>
+      <x:String>UiPath.Activities.System.Collections</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -121,6 +122,7 @@
       <AssemblyReference>netstandard</AssemblyReference>
       <AssemblyReference>CredentialManagement</AssemblyReference>
       <AssemblyReference>UiPath.Credentials.Activities</AssemblyReference>
+      <AssemblyReference>System.Linq.Async.Queryable</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <Sequence DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="897.2,683.2" sap2010:WorkflowViewState.IdRef="Sequence_1">
@@ -139,7 +141,7 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Flowchart DisplayName="Global" sap:VirtualizedContainerService.HintSize="903.2,362.4" sap2010:WorkflowViewState.IdRef="Flowchart_1">
+    <Flowchart DisplayName="Global" sap:VirtualizedContainerService.HintSize="633.6,660" sap2010:WorkflowViewState.IdRef="Flowchart_1">
       <Flowchart.Variables>
         <Variable x:TypeArguments="x:String" Name="fileNameExcel" />
         <Variable x:TypeArguments="x:String" Name="fileSubjectMail" />
@@ -454,7 +456,7 @@
           </ueab:ExcelProcessScopeX>
         </Sequence>
         <FlowStep.Next>
-          <FlowStep x:Name="__ReferenceID1">
+          <FlowStep x:Name="__ReferenceID1" sap2010:WorkflowViewState.IdRef="FlowStep_2">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <av:Point x:Key="ShapeLocation">485,155</av:Point>
@@ -469,14 +471,9 @@
               </sap:WorkflowViewStateService.ViewState>
               <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="SMTPMail - Invoke Workflow File (SMTPMail.xaml)" sap:VirtualizedContainerService.HintSize="416,167.2" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="SMTPMail.xaml">
                 <ui:InvokeWorkflowFile.Arguments>
+                  <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="arg_configDict">[configDict]</InArgument>
                   <InArgument x:TypeArguments="x:String" x:Key="arg_ResourcesFolder">[resourcesFolder]</InArgument>
-                  <InArgument x:TypeArguments="x:String" x:Key="arg_FileBodyMail">[fileBodyMail]</InArgument>
-                  <InArgument x:TypeArguments="x:String" x:Key="arg_FileSubjectMail">[fileSubjectMail]</InArgument>
                   <InArgument x:TypeArguments="sd:DataTable" x:Key="arg_DtInvoices">[dtInvoices]</InArgument>
-                  <InArgument x:TypeArguments="x:String" x:Key="arg_SMTPMail">[SMTPEmail]</InArgument>
-                  <InArgument x:TypeArguments="x:String" x:Key="arg_SMTPPassword">[SMTPPwd]</InArgument>
-                  <InArgument x:TypeArguments="x:String" x:Key="arg_SMTPServer">[SMTPServer]</InArgument>
-                  <InArgument x:TypeArguments="x:String" x:Key="arg_SMTPPort">[SMTPPort]</InArgument>
                 </ui:InvokeWorkflowFile.Arguments>
               </ui:InvokeWorkflowFile>
             </Sequence>

@@ -1,13 +1,8 @@
 <Activity mc:Ignorable="sap sap2010" x:Class="SMTPMail" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:umae="clr-namespace:UiPath.Mail.Activities.Enums;assembly=UiPath.Mail.Activities" xmlns:umame="clr-namespace:UiPath.MicrosoftOffice365.Activities.Mail.Enums;assembly=UiPath.Mail.Activities" xmlns:usau="clr-namespace:UiPath.Shared.Activities.Utils;assembly=UiPath.Mail.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
+    <x:Property Name="arg_configDict" Type="InArgument(scg:Dictionary(x:String, x:String))" />
     <x:Property Name="arg_ResourcesFolder" Type="InArgument(x:String)" />
-    <x:Property Name="arg_FileBodyMail" Type="InArgument(x:String)" />
-    <x:Property Name="arg_FileSubjectMail" Type="InArgument(x:String)" />
     <x:Property Name="arg_DtInvoices" Type="InArgument(sd:DataTable)" />
-    <x:Property Name="arg_SMTPMail" Type="InArgument(x:String)" />
-    <x:Property Name="arg_SMTPPassword" Type="InArgument(x:String)" />
-    <x:Property Name="arg_SMTPServer" Type="InArgument(x:String)" />
-    <x:Property Name="arg_SMTPPort" Type="InArgument(x:String)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
@@ -124,7 +119,7 @@
       <AssemblyReference>System.IO.FileSystem.DriveInfo</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="SMTPMail" sap:VirtualizedContainerService.HintSize="897.2,1383.2" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="SMTPMail" sap:VirtualizedContainerService.HintSize="897.2,1900" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:Int32" Name="index">
         <sap:WorkflowViewStateService.ViewState>
@@ -140,7 +135,7 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Sequence sap:VirtualizedContainerService.HintSize="511.2,1360" sap2010:WorkflowViewState.IdRef="Sequence_2">
+    <Sequence sap:VirtualizedContainerService.HintSize="547.2,1876.8" sap2010:WorkflowViewState.IdRef="Sequence_2">
       <Sequence.Variables>
         <Variable x:TypeArguments="x:Int32" Name="indexData" />
         <Variable x:TypeArguments="x:String" Name="txtSubjectMail" />
@@ -153,9 +148,10 @@
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <ui:ReadTextFile File="{x:Null}" Content="[txtSubjectMail]" DisplayName="Read File SubjectMail.txt" FileName="[Path.Combine(arg_ResourcesFolder, arg_FileSubjectMail)]" sap:VirtualizedContainerService.HintSize="477.6,123.2" sap2010:WorkflowViewState.IdRef="ReadTextFile_1" />
-      <ui:ReadTextFile File="{x:Null}" Content="[txtBodyMail]" DisplayName="Read File BodyMail.txt" FileName="[Path.Combine(arg_ResourcesFolder, arg_FileBodyMail)]" sap:VirtualizedContainerService.HintSize="477.6,123.2" sap2010:WorkflowViewState.IdRef="ReadTextFile_2" />
-      <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="477.6,149.6" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+      <ui:ReadTextFile File="{x:Null}" Content="[txtSubjectMail]" DisplayName="Read File SubjectMail.txt" FileName="[Path.Combine(arg_ResourcesFolder, arg_configDict(&quot;fileSubjectMail&quot;))]" sap:VirtualizedContainerService.HintSize="513.6,123.2" sap2010:WorkflowViewState.IdRef="ReadTextFile_1" />
+      <ui:ReadTextFile File="{x:Null}" Content="[txtBodyMail]" DisplayName="Read File BodyMail.txt" FileName="[Path.Combine(arg_ResourcesFolder, arg_configDict(&quot;fileBodyMail&quot;))]" sap:VirtualizedContainerService.HintSize="513.6,123.2" sap2010:WorkflowViewState.IdRef="ReadTextFile_2" />
+      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="513.6,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_4" Message="[arg_configDict(&quot;SMTPMail&quot;)]" />
+      <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="513.6,149.6" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
         <ui:MultipleAssign.AssignOperations>
           <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
             <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
@@ -169,7 +165,7 @@
           </scg:List>
         </ui:MultipleAssign.AssignOperations>
       </ui:MultipleAssign>
-      <ui:FilterDataTable DataTable="[arg_DtInvoices]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="477.6,194.4" sap2010:WorkflowViewState.IdRef="FilterDataTable_2" OutputDataTable="[dtInvoices]" SelectColumnsMode="Remove">
+      <ui:FilterDataTable DataTable="[arg_DtInvoices]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="513.6,194.4" sap2010:WorkflowViewState.IdRef="FilterDataTable_2" OutputDataTable="[dtInvoices]" SelectColumnsMode="Remove">
         <ui:FilterDataTable.Filters>
           <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
             <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
@@ -188,13 +184,13 @@
           </scg:List>
         </ui:FilterDataTable.SelectColumns>
       </ui:FilterDataTable>
-      <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="[index]" DataTable="[dtInvoices]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="477.6,686.4" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+      <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="[index]" DataTable="[dtInvoices]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="513.6,1028.8" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
         <ui:ForEachRow.Body>
           <ActivityAction x:TypeArguments="sd:DataRow">
             <ActivityAction.Argument>
               <DelegateInArgument x:TypeArguments="sd:DataRow" Name="CurrentRow" />
             </ActivityAction.Argument>
-            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="449.6,513.6" sap2010:WorkflowViewState.IdRef="Sequence_4">
+            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="512,856" sap2010:WorkflowViewState.IdRef="Sequence_4">
               <Sequence.Variables>
                 <Variable x:TypeArguments="x:String" Name="getPriority" />
                 <Variable x:TypeArguments="x:String" Name="getInvoiceID" />
@@ -211,7 +207,7 @@
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="416,56.8" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
+              <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="478.4,399.2" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
                 <ui:MultipleAssign.AssignOperations>
                   <scg:List x:TypeArguments="ui:AssignOperation" Capacity="16">
                     <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
@@ -290,12 +286,12 @@
                 </ui:MultipleAssign.AssignOperations>
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     <x:Boolean x:Key="IsPinned">False</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
               </ui:MultipleAssign>
-              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="416,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_3" Message="[&quot;[&quot;+indexData.ToString+&quot;] FROM=[&quot;+arg_SMTPMail+&quot;] | FROM=[&quot;+getEmailCustomer+&quot;] | INVOICEID=[&quot;+getInvoiceID+&quot;] | NAME=[&quot;+getCustomerName+&quot;] DUE DATE=[&quot;+getDueDate+&quot;] | OVERDUE=[&quot;+getDaysOverDue+&quot; days.] | AMOUNT=]Rp.&quot;+getAmount+&quot;] | PRIORITY=[&quot;+getPriority+&quot;]&quot;]">
+              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="478.4,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_3" Message="[&quot;[&quot;+indexData.ToString+&quot;] FROM=[&quot;+arg_configDict(&quot;SMTPMail&quot;)+&quot;] | FROM=[&quot;+getEmailCustomer+&quot;] | INVOICEID=[&quot;+getInvoiceID+&quot;] | NAME=[&quot;+getCustomerName+&quot;] DUE DATE=[&quot;+getDueDate+&quot;] | OVERDUE=[&quot;+getDaysOverDue+&quot; days.] | AMOUNT=]Rp.&quot;+getAmount+&quot;] | PRIORITY=[&quot;+getPriority+&quot;]&quot;]">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -303,7 +299,7 @@
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
               </ui:LogMessage>
-              <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="416,56.8" sap2010:WorkflowViewState.IdRef="CommentOut_2">
+              <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="478.4,56.8" sap2010:WorkflowViewState.IdRef="CommentOut_2">
                 <ui:CommentOut.Body>
                   <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="449.6,333.6" sap2010:WorkflowViewState.IdRef="Sequence_6">
                     <sap:WorkflowViewStateService.ViewState>
@@ -311,7 +307,7 @@
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
-                    <ui:SendMail Bcc="{x:Null}" Cc="{x:Null}" ContinueOnError="{x:Null}" MailMessage="{x:Null}" ReplyTo="{x:Null}" ResourceAttachmentList="{x:Null}" ResourceAttachments="{x:Null}" Result="{x:Null}" SecurePassword="{x:Null}" TimeoutMS="{x:Null}" UseOAuth="{x:Null}" Action="Forward" AttachmentInputMode="Existing" Body="formattedBodyMail" ConnectionMode="LegacyConfiguration" CreatedAfterSolutionSupport="True" DisplayName="Send SMTP Email" Email="[arg_SMTPMail]" EnableSSL="True" From="[arg_SMTPMail]" sap:VirtualizedContainerService.HintSize="416,273.6" sap2010:WorkflowViewState.IdRef="SendMail_2" IgnoreCRL="False" IsBodyHtml="False" Name="DBOT24" Password="[arg_SMTPPassword]" Port="587" SecureConnection="Auto" Server="[arg_SMTPServer]" Subject="[formattedSubjectMail]" To="[getEmailCustomer]" UseISConnection="False" UseRichTextEditor="True">
+                    <ui:SendMail Bcc="{x:Null}" Cc="{x:Null}" ContinueOnError="{x:Null}" MailMessage="{x:Null}" ReplyTo="{x:Null}" ResourceAttachmentList="{x:Null}" ResourceAttachments="{x:Null}" Result="{x:Null}" SecurePassword="{x:Null}" TimeoutMS="{x:Null}" UseOAuth="{x:Null}" Action="Forward" AttachmentInputMode="Existing" Body="formattedBodyMail" ConnectionMode="LegacyConfiguration" CreatedAfterSolutionSupport="True" DisplayName="Send SMTP Email" Email="[arg_configDict(&quot;SMTPMail&quot;)]" EnableSSL="True" From="[arg_configDict(&quot;SMTPMail&quot;)]" sap:VirtualizedContainerService.HintSize="416,273.6" sap2010:WorkflowViewState.IdRef="SendMail_2" IgnoreCRL="False" IsBodyHtml="False" Name="DBOT24" Password="[arg_configDict(&quot;SMTPPassword&quot;)]" Port="[CInt(arg_configDict(&quot;SMTPPort&quot;))]" SecureConnection="Auto" Server="[arg_configDict(&quot;SMTPServer&quot;)]" Subject="[formattedSubjectMail]" To="[getEmailCustomer]" UseISConnection="False" UseRichTextEditor="True">
                       <ui:SendMail.AttachmentsBackup>
                         <usau:BackupSlot x:TypeArguments="umame:AttachmentInputMode" StoredValue="Existing">
                           <usau:BackupSlot.BackupValues>
@@ -347,7 +343,7 @@
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
               </ui:CommentOut>
-              <Assign DisplayName="Assign indexData++" sap:VirtualizedContainerService.HintSize="416,165.6" sap2010:WorkflowViewState.IdRef="Assign_4">
+              <Assign DisplayName="Assign indexData++" sap:VirtualizedContainerService.HintSize="478.4,165.6" sap2010:WorkflowViewState.IdRef="Assign_4">
                 <Assign.To>
                   <OutArgument x:TypeArguments="x:Int32">[indexData]</OutArgument>
                 </Assign.To>
